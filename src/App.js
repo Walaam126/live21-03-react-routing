@@ -4,27 +4,27 @@ import InstructorProfile from "./components/InstructorProfile";
 import NotFound from "./components/NotFound";
 import { useState } from "react";
 import { Route, Switch } from "react-router";
+import { useParams, Redirect } from "react-router-dom";
 const App = ({ instructors }) => {
   const [currentPage, setCurrentPage] = useState("/");
   const homemadeRouter = () => {
   };
+ 
   return (
     <AppWrapper>
-    <Switch>     
+      <Switch>  
+      <Route path="/404" >
+       <NotFound />
+      </Route>  
    <Route path="/instructors/:instructorSlug" >
     <InstructorProfile
             instructors={instructors}
           />
     </Route>
-      
-    <Route path="/404" >
-       <NotFound />
-      </Route>
-
     <Route exact path="/">
      <Home instructors={instructors} />
-   
-    </Route>
+        </Route>
+     <Redirect to="/404"/>
       </Switch>
       </AppWrapper>
   )
